@@ -11,18 +11,18 @@ public class FrequencyGenerator {
     private static final DecimalFormat decfor = new DecimalFormat("0.000");
     private final ArrayList<String> restricted = new ArrayList<>();
 
-    public void generateFreq(int channels){
+    public void generateFreq(int channels) {
         readFrequency();
-        for (int i = 0; i < channels;) {
+        for (int i = 0; i < channels; ) {
             boolean freqIsGood = false;
-            while (!freqIsGood){
+            while (!freqIsGood) {
                 double temp = endFreq - (endFreq - startFreq) * new Random().nextDouble();
-                    freqIsGood = isFrequencyGood(temp);
-                    if(freqIsGood){
-                        writeFrequency(decfor.format(temp));
-                        restricted.add(decfor.format(temp));
-                    }
+                freqIsGood = isFrequencyGood(temp);
+                if (freqIsGood) {
+                    writeFrequency(decfor.format(temp));
+                    restricted.add(decfor.format(temp));
                 }
+            }
             i++;
         }
     }
@@ -32,23 +32,25 @@ public class FrequencyGenerator {
         double lower = Double.parseDouble((decfor.format(d))) - 0.125;
         for (String s : restricted) {
             double temp = 0;
-            if(s != null){
+            if (s != null) {
                 temp = Double.parseDouble(s);
             }
-            if(temp > lower & temp < higher & temp != d){
+            if (temp > lower & temp > higher & temp != d) {
                 return true;
             }
         }
         return false;
     }
-    private void writeFrequency(String s){
-        try(BufferedWriter writer = new BufferedWriter(new FileWriter("GeneratedFreq.txt",true))){
+
+    private void writeFrequency(String s) {
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter("GeneratedFreq.txt", true))) {
             writer.newLine();
             writer.write(s + "0");
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            e.printStackTrace();
         }
     }
+
     private void readFrequency() {
         restricted.clear();
         try {
