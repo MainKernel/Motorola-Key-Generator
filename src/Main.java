@@ -1,5 +1,6 @@
-import MotorolaChanelKeyGenerator.*;
-import RetransKeyGenerator.*;
+import freqencyGenerator.FrequencyGenerator;
+import motorolaChanelKeyGenerator.*;
+import retransKeyGenerator.*;
 import java.util.*;
 import java.io.*;
 
@@ -7,7 +8,8 @@ public class Main {
     public static void main(String[] args)throws IOException{
             Scanner scanner = new Scanner(System.in);
             while (true) {
-                System.out.println("Select what do you need: \n1. Generate Chanel Key\n2. Generate Retrans Key\n3. Exit");
+                System.out.println("Select what do you need: \n1. Generate Chanel Key" +
+                        "\n2. Generate Retrans Key\n3. Generate frequency`s\n4.Exit");
                 int menuChoice = scanner.nextInt();
                 switch (menuChoice){
                     case 1:
@@ -23,6 +25,11 @@ public class Main {
                                 (numberOfRetransKeys));
                         break;
                     case 3:
+                        System.out.println("Enter how much frequency's you need");
+                        int numberOfFrequencys = scanner.nextInt();
+                        new FrequencyGenerator().generateFreq(numberOfFrequencys);
+                        break;
+                    case 4:
                         return;
                 }
             }

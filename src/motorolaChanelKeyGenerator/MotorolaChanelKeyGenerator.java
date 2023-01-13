@@ -1,4 +1,4 @@
-package MotorolaChanelKeyGenerator;
+package motorolaChanelKeyGenerator;
 import java.io.*;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
